@@ -1,0 +1,22 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+repositories {
+    maven { url = 'https://maven.aliyun.com/repository/central'}
+    maven { url = 'https://repo.spring.io/libs-milestone'}
+    maven { url = 'https://repo.spring.io/snapshot/'}
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/'}
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
