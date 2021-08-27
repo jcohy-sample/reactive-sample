@@ -2,14 +2,14 @@ rootProject.name = 'reactive-sample'
 
 include 'reactive-programming-in-spring-5:chapter-01'
 include 'reactive-programming-in-spring-5:chapter-02'
-//include 'reactive-programming-in-spring-5:chapter-03'
-//include 'reactive-programming-in-spring-5:chapter-04'
-//include 'reactive-programming-in-spring-5:chapter-05'
-//include 'reactive-programming-in-spring-5:chapter-06'
-//include 'reactive-programming-in-spring-5:chapter-07'
-//include 'reactive-programming-in-spring-5:chapter-08'
-//include 'reactive-programming-in-spring-5:chapter-09'
-//include 'reactive-programming-in-spring-5:chapter-10'
+include 'reactive-programming-in-spring-5:chapter-03'
+include 'reactive-programming-in-spring-5:chapter-04'
+include 'reactive-programming-in-spring-5:chapter-05'
+include 'reactive-programming-in-spring-5:chapter-06'
+include 'reactive-programming-in-spring-5:chapter-07'
+include 'reactive-programming-in-spring-5:chapter-08'
+include 'reactive-programming-in-spring-5:chapter-09'
+include 'reactive-programming-in-spring-5:chapter-10'
 
 
 

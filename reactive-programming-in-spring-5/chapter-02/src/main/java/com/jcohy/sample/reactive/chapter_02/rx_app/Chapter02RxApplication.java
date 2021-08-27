@@ -19,9 +19,8 @@ import java.util.concurrent.Executor;
  * @version 1.0.0 2021/8/26:17:33
  * @since 1.0.0
  */
-@EnableAsync
 @SpringBootApplication
-public class Chapter02RxApplication implements AsyncConfigurer {
+public class Chapter02RxApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(Chapter02RxApplication.class, args);
