@@ -2,7 +2,16 @@ rootProject.name = 'reactive-sample'
 
 include 'reactive-programming-in-spring-5:chapter-01'
 include 'reactive-programming-in-spring-5:chapter-02'
-include 'reactive-programming-in-spring-5:chapter-03'
+
+include 'reactive-programming-in-spring-5:chapter-03:async-vs-reactive'
+include 'reactive-programming-in-spring-5:chapter-03:conversion-problem'
+include 'reactive-programming-in-spring-5:chapter-03:jdk9'
+include 'reactive-programming-in-spring-5:chapter-03:news-service'
+include 'reactive-programming-in-spring-5:chapter-03:push-vs-pull'
+include 'reactive-programming-in-spring-5:chapter-03:rxjava-reactivestreams'
+include 'reactive-programming-in-spring-5:chapter-03:vert-x'
+
+
 include 'reactive-programming-in-spring-5:chapter-04'
 include 'reactive-programming-in-spring-5:chapter-05'
 include 'reactive-programming-in-spring-5:chapter-06'

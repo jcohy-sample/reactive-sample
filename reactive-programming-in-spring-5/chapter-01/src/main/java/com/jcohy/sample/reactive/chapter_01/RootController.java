@@ -5,10 +5,9 @@ package com.jcohy.sample.reactive.chapter_01;
  * Copyright: Copyright (c) 2021.
  * <a href="https://www.jcohy.com" target="_blank">https://www.jcohy.com</a>
  *
- * @author jiac
- * @version 1.0.0 2021/8/26:16:01
  * @since 1.0.0
  */
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

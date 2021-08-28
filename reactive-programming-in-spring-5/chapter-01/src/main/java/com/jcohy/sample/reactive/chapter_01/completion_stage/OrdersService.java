@@ -21,15 +21,6 @@ public class OrdersService {
         this.shoppingCardService = shoppingCardService;
     }
 
-    void process() {
-        Input input = new Input();
-
-        shoppingCardService.calculate(input)
-                .thenAccept(v -> System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed"));
-
-        System.out.println(shoppingCardService.getClass().getSimpleName() + " calculate called");
-    }
-
     public static void main(String[] args) throws InterruptedException {
         long start = System.currentTimeMillis();
 
@@ -41,5 +32,14 @@ public class OrdersService {
         System.out.println("Total elapsed time in millis is : " + (System.currentTimeMillis() - start));
 
         Thread.sleep(1000);
+    }
+
+    void process() {
+        Input input = new Input();
+
+        shoppingCardService.calculate(input)
+                .thenAccept(v -> System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed"));
+
+        System.out.println(shoppingCardService.getClass().getSimpleName() + " calculate called");
     }
 }

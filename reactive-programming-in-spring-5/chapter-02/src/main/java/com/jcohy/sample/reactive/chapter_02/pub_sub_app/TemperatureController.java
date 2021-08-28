@@ -40,6 +40,7 @@ import static java.lang.String.format;
 @RestController
 public class TemperatureController {
     static final long SSE_SESSION_TIMEOUT = 30 * 60 * 1000L;
+
     private static final Logger log = LoggerFactory.getLogger(TemperatureController.class);
 
     private final Set<SseEmitter> clients = new CopyOnWriteArraySet<>();
@@ -60,7 +61,7 @@ public class TemperatureController {
 
     @Async
     @EventListener
-    public void handleMessage(Temperature temperature){
+    public void handleMessage(Temperature temperature) {
         log.info(format("Temperature: %4.2f C, active subscribers: %d",
                 temperature.getValue(), clients.size()));
 

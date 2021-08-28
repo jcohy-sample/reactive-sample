@@ -18,7 +18,7 @@
     if (!!window.EventSource) {
         const eventSource = new EventSource("/temperature-stream");
 
-        window.onbeforeunload = function(){
+        window.onbeforeunload = function () {
             eventSource.close();
         };
 

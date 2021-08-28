@@ -18,7 +18,8 @@ public class BlockingShoppingCardService implements ShoppingCardService {
     public Output calculate(Input value) {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
 

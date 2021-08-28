@@ -15,13 +15,14 @@ import com.jcohy.sample.reactive.chapter_01.commons.Output;
  * @version 1.0.0 2021/8/26:15:53
  * @since 1.0.0
  */
-public class CompletionStageShoppingCardService implements ShoppingCardService{
+public class CompletionStageShoppingCardService implements ShoppingCardService {
     @Override
     public CompletionStage<Output> calculate(Input input) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return new Output();

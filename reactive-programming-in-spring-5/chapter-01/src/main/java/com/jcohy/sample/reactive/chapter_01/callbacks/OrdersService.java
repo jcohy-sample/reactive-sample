@@ -19,13 +19,6 @@ public class OrdersService {
         this.shoppingCardService = shoppingCardService;
     }
 
-    void process() {
-        Input input = new Input();
-        shoppingCardService.calculate(input,output -> {
-            System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed");
-        });
-    }
-
     public static void main(String[] args) throws InterruptedException {
         long start = System.currentTimeMillis();
 
@@ -39,5 +32,12 @@ public class OrdersService {
         System.out.println("运行总时间 (单位：毫秒): " + (System.currentTimeMillis() - start));
 
         Thread.sleep(1000);
+    }
+
+    void process() {
+        Input input = new Input();
+        shoppingCardService.calculate(input, output -> {
+            System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed");
+        });
     }
 }

@@ -1,0 +1,26 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+repositories {
+	maven { url = 'https://maven.aliyun.com/repository/central' }
+	maven { url = 'https://repo.spring.io/libs-milestone' }
+	maven { url = 'https://repo.spring.io/snapshot/' }
+	maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
+	mavenCentral()
+}
+
+dependencies {
+	implementation('org.reactivestreams:reactive-streams:1.0.2')
+	testImplementation('org.reactivestreams:reactive-streams-tck:1.0.2')
+	testImplementation('org.hamcrest:java-hamcrest:2.0.0.0')
+	testImplementation('io.projectreactor:reactor-core:3.2.0.RELEASE')
+	testImplementation('io.projectreactor:reactor-test:3.2.0.RELEASE')
+	testImplementation('junit:junit:4.12')
+}
+
+test {
+	useJUnitPlatform()
+}

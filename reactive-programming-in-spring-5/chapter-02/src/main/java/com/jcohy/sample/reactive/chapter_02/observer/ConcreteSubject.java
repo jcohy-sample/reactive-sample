@@ -28,6 +28,8 @@ public class ConcreteSubject implements Subjects<String> {
 
     @Override
     public void notifyObservers(String event) {
-        observers.forEach((observer) -> {observer.observe(event);});
+        observers.forEach((observer) -> {
+            observer.observe(event);
+        });
     }
 }

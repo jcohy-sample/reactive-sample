@@ -18,6 +18,8 @@ public class ParallelSubject implements Subjects<String> {
     private final Set<Observers<String>> observers =
             new CopyOnWriteArraySet<>();
 
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
+
     @Override
     public void registerObserver(Observers<String> observers) {
         this.observers.add(observers);
@@ -27,8 +29,6 @@ public class ParallelSubject implements Subjects<String> {
     public void unregisterObserver(Observers<String> observers) {
         this.observers.remove(observers);
     }
-
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
 
     @Override
     public void notifyObservers(String event) {

@@ -29,7 +29,7 @@ public class AsyncServiceOne {
     private static final String PORT = "8080";
 
     @GetMapping
-    public Future<?> process(){
+    public Future<?> process() {
         AsyncRestTemplate template = new AsyncRestTemplate();
         SuccessCallback onSuccess = r -> System.out.println("Success");
         FailureCallback onFailure = e -> System.out.println("Failure");
@@ -39,7 +39,7 @@ public class AsyncServiceOne {
                 ExamplesCollection.class
         );
 
-        response.addCallback(onSuccess,onFailure);
+        response.addCallback(onSuccess, onFailure);
         return response;
     }
 }

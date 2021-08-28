@@ -15,7 +15,7 @@ import com.jcohy.sample.reactive.chapter_01.commons.Output;
  * @version 1.0.0 2021/8/26:15:31
  * @since 1.0.0
  */
-public class FutureShoppingCardService implements ShoppingCardService{
+public class FutureShoppingCardService implements ShoppingCardService {
     @Override
     public Future<Output> calculate(Input input) {
         FutureTask<Output> futureTask = new FutureTask<>(() -> {

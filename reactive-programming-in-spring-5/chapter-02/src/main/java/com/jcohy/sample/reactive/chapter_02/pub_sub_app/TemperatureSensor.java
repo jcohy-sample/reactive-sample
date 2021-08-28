@@ -1,9 +1,10 @@
 package com.jcohy.sample.reactive.chapter_02.pub_sub_app;
 
-import javax.annotation.PostConstruct;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,9 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class TemperatureSensor {
 
     private final ApplicationEventPublisher publisher;
+
     private final Random random = new Random();
+
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     public TemperatureSensor(ApplicationEventPublisher publisher) {
@@ -32,8 +35,8 @@ public class TemperatureSensor {
     }
 
     @PostConstruct
-    public void startProcessing(){
-        this.executor.schedule(this::probe,1,SECONDS);
+    public void startProcessing() {
+        this.executor.schedule(this::probe, 1, SECONDS);
     }
 
 

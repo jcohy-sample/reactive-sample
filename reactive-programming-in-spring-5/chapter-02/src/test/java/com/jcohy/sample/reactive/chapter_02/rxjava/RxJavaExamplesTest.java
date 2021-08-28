@@ -55,7 +55,7 @@ public class RxJavaExamplesTest {
     public void creatingRxStreams() {
         Observable.just("1", "2", "3", "4")
                 .forEach(System.out::print);
-        Observable.from(new String[]{"A", "B", "C"})
+        Observable.from(new String[] { "A", "B", "C" })
                 .forEach(System.out::print);
         Observable.from(Collections.<String>emptyList());
 
@@ -63,7 +63,7 @@ public class RxJavaExamplesTest {
         Future<String> future = Executors.newCachedThreadPool().submit(() -> "World");
         Observable<String> world = Observable.from(future);
 
-        Observable.concat(hello,world,Observable.just("!"))
+        Observable.concat(hello, world, Observable.just("!"))
                 .forEach(System.out::print);
     }
 
@@ -72,7 +72,7 @@ public class RxJavaExamplesTest {
         Observable.zip(
                 Observable.just("A", "B", "C"),
                 Observable.just("1", "2", "3"),
-                (x,y) -> x + y
+                (x, y) -> x + y
         ).forEach(System.out::println);
     }
 
@@ -80,7 +80,7 @@ public class RxJavaExamplesTest {
     @Test
     public void timeBasedSequenceExample() throws InterruptedException {
         Observable.interval(1, TimeUnit.SECONDS)
-                .subscribe( e -> System.out.println("Received: " + e));
+                .subscribe(e -> System.out.println("Received: " + e));
         Thread.sleep(5000);
     }
 
@@ -88,8 +88,8 @@ public class RxJavaExamplesTest {
     public void managingSubscription() {
         AtomicReference<Subscription> subscription = new AtomicReference<>();
 
-        subscription.set(Observable.interval(100,TimeUnit.MILLISECONDS)
-                .subscribe( e -> {
+        subscription.set(Observable.interval(100, TimeUnit.MILLISECONDS)
+                .subscribe(e -> {
                     System.out.println("Received: " + e);
                     if (e >= 10) {
                         subscription.get().unsubscribe();
@@ -108,7 +108,7 @@ public class RxJavaExamplesTest {
                 .interval(100, TimeUnit.MILLISECONDS)
                 .subscribe(System.out::println);
 
-        externalSignal.await(450,TimeUnit.MILLISECONDS);
+        externalSignal.await(450, TimeUnit.MILLISECONDS);
         subscribe.unsubscribe();
     }
 

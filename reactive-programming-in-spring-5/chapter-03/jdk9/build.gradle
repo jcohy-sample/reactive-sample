@@ -1,0 +1,23 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+repositories {
+	maven { url = 'https://maven.aliyun.com/repository/central' }
+	maven { url = 'https://repo.spring.io/libs-milestone' }
+	maven { url = 'https://repo.spring.io/snapshot/' }
+	maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
+	mavenCentral()
+}
+
+dependencies {
+	implementation(project(':reactive-programming-in-spring-5:chapter-03:news-service'))
+	implementation('org.reactivestreams:reactive-streams-flow-adapters:1.0.2')
+	implementation('io.reactivex.rxjava2:rxjava:2.2.2')
+}
+
+test {
+	useJUnitPlatform()
+}

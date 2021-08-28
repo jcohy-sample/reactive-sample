@@ -14,7 +14,7 @@ import com.jcohy.sample.reactive.chapter_01.commons.Output;
  * @version 1.0.0 2021/8/26:15:24
  * @since 1.0.0
  */
-public class AsyncShoppingCardService implements ShoppingCardService{
+public class AsyncShoppingCardService implements ShoppingCardService {
 
     @Override
     public void calculate(Input input, Consumer<Output> c) {

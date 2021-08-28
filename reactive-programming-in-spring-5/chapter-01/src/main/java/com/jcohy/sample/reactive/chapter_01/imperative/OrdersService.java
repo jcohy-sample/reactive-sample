@@ -20,13 +20,6 @@ public class OrdersService {
         this.scService = scService;
     }
 
-    void process() {
-        Input input = new Input();
-        Output output = scService.calculate(input);
-
-        System.out.println(scService.getClass().getSimpleName() + " execution completed");
-    }
-
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
@@ -34,5 +27,12 @@ public class OrdersService {
         new OrdersService(new BlockingShoppingCardService()).process();
 
         System.out.println("Total elapsed time in millis is : " + (System.currentTimeMillis() - start));
+    }
+
+    void process() {
+        Input input = new Input();
+        Output output = scService.calculate(input);
+
+        System.out.println(scService.getClass().getSimpleName() + " execution completed");
     }
 }

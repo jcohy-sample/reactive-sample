@@ -21,11 +21,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class TemperatureSensor {
     private static final Logger log = LoggerFactory.getLogger(TemperatureSensor.class);
+
     private final Random rnd = new Random();
 
     private final Observable<Temperature> dataStream =
             Observable
-                    .range(0,Integer.MAX_VALUE)
+                    .range(0, Integer.MAX_VALUE)
                     .concatMap(ignore -> Observable
                             .just(1)
                             .delay(rnd.nextInt(5000), TimeUnit.MILLISECONDS)

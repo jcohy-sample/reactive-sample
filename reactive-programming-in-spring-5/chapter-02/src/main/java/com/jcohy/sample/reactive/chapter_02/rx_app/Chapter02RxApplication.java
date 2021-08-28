@@ -1,14 +1,7 @@
 package com.jcohy.sample.reactive.chapter_02.rx_app;
 
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
-import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.Executor;
 
 /**
  * <p> 描述: .
@@ -20,7 +13,7 @@ import java.util.concurrent.Executor;
  * @since 1.0.0
  */
 @SpringBootApplication
-public class Chapter02RxApplication{
+public class Chapter02RxApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Chapter02RxApplication.class, args);

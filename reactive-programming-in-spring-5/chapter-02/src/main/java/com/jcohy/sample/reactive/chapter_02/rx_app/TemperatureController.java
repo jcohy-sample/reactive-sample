@@ -63,7 +63,9 @@ public class TemperatureController {
         static final long SSE_SESSION_TIMEOUT = 30 * 60 * 1000L;
 
         private final static AtomicInteger sessionIdSequence = new AtomicInteger(0);
+
         private final int sessionId = sessionIdSequence.incrementAndGet();
+
         private final Subscriber<Temperature> subscriber;
 
         RxSeeEmitter() {
@@ -86,7 +88,8 @@ public class TemperatureController {
                     try {
                         RxSeeEmitter.this.send(temperature);
                         log.info("[{}] << {} ", sessionId, temperature.getValue());
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         log.warn("[{}] Can not send event to SSE, closing subscription, message: {}",
                                 sessionId, e.getMessage());
                         unsubscribe();

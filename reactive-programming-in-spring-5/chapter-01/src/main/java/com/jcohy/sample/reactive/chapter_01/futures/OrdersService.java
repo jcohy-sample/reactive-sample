@@ -22,19 +22,6 @@ public class OrdersService {
         this.shoppingCardService = shoppingCardService;
     }
 
-    void process() {
-        Input input = new Input();
-        Future<Output> result = shoppingCardService.calculate(input);
-
-        System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed");
-
-        try {
-            result.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
@@ -44,5 +31,19 @@ public class OrdersService {
         ordersService1.process();
 
         System.out.println("Total elapsed time in millis is : " + (System.currentTimeMillis() - start));
+    }
+
+    void process() {
+        Input input = new Input();
+        Future<Output> result = shoppingCardService.calculate(input);
+
+        System.out.println(shoppingCardService.getClass().getSimpleName() + " execution completed");
+
+        try {
+            result.get();
+        }
+        catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }
