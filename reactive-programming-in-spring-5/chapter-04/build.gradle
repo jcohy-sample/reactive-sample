@@ -12,9 +12,19 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	reactorVersion = '3.2.0.RELEASE'
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation('org.springframework.boot:spring-boot-starter')
+
+	implementation("io.projectreactor:reactor-core:${reactorVersion}")
+	implementation("io.projectreactor:reactor-test:${reactorVersion}")
+
+	implementation('org.projectlombok:lombok')
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
