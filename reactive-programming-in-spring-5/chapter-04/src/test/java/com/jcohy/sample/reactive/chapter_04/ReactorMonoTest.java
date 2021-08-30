@@ -49,8 +49,9 @@ public class ReactorMonoTest {
     public void simpleSubscribe(){
 
     }
+
     /**
-     * 此代码可将对 sessionld 的验证推迟至发生实际订阅之后.
+     * 此代码可将对 sessionId 的验证推迟至发生实际订阅之后.
      */
     public Mono<User> requestUserDate(String userId) {
         return Mono.defer(() ->
@@ -68,6 +69,15 @@ public class ReactorMonoTest {
         return isValid(userId)
                 ? Mono.fromCallable(() -> requestUser(userId))
                 : Mono.error(new IllegalArgumentException("Invalid user id"));
+    }
+
+    @Test
+    public void shouldCreateDefer() {
+        Mono<User> userMono = requestUserDate(null);
+        StepVerifier.create(userMono)
+                .expectNextCount(0)
+                .expectErrorMessage("Invalid user id")
+                .verify();
     }
 
     private User requestUser(String id) {
