@@ -21,13 +21,13 @@ public class ThreadLocalProblemShowcaseTest {
 
     @Test
     public void shouldFailDueToDifferentThread() {
-        ThreadLocal<Map<Object,Object>> threadLocal = new ThreadLocal<>();
+        ThreadLocal<Map<Object, Object>> threadLocal = new ThreadLocal<>();
         threadLocal.set(new HashMap<>());
 
-        Flux.range(0,10)
-                .doOnNext( k -> threadLocal.get().put(k,new Random(k).nextGaussian()))
+        Flux.range(0, 10)
+                .doOnNext(k -> threadLocal.get().put(k, new Random(k).nextGaussian()))
                 .publishOn(Schedulers.parallel())
-                .map( k -> threadLocal.get().get(k))
+                .map(k -> threadLocal.get().get(k))
                 .blockLast();
     }
 }

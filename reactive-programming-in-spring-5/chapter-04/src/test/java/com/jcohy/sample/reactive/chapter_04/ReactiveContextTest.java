@@ -37,6 +37,6 @@ public class ReactiveContextTest {
 
     Mono<Context> printCurrentContext(String id) {
         return Mono.subscriberContext()
-                .doOnNext( context -> print(id,context));
+                .doOnNext(context -> print(id, context));
     }
 }

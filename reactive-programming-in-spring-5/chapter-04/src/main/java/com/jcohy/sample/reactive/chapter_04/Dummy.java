@@ -3,6 +3,7 @@ package com.jcohy.sample.reactive.chapter_04;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
+
 /**
  * <p> 描述: .
  * Copyright: Copyright (c) 2021.
@@ -14,9 +15,10 @@ import reactor.core.publisher.Flux;
  */
 public class Dummy {
     private static final Logger log = LoggerFactory.getLogger(Dummy.class);
+
     public static void main(String[] args) {
-        Flux.just("A","B","C")
+        Flux.just("A", "B", "C")
                 .subscribe(
-                        (data) -> log.info("onNext: {}",data));
+                        (data) -> log.info("onNext: {}", data));
     }
 }

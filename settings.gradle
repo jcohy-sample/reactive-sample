@@ -11,10 +11,13 @@ include 'reactive-programming-in-spring-5:chapter-03:push-vs-pull'
 include 'reactive-programming-in-spring-5:chapter-03:rxjava-reactivestreams'
 include 'reactive-programming-in-spring-5:chapter-03:vert-x'
 
-
 include 'reactive-programming-in-spring-5:chapter-04'
 include 'reactive-programming-in-spring-5:chapter-05'
-include 'reactive-programming-in-spring-5:chapter-06'
+
+include 'reactive-programming-in-spring-5:chapter-06:functional-spring-boot'
+include 'reactive-programming-in-spring-5:chapter-06:samples'
+include 'reactive-programming-in-spring-5:chapter-06:security-samples'
+
 include 'reactive-programming-in-spring-5:chapter-07'
 include 'reactive-programming-in-spring-5:chapter-08'
 include 'reactive-programming-in-spring-5:chapter-09'

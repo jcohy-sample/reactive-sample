@@ -23,7 +23,7 @@ public class ReactorMonoTest {
     private static final Logger log = LoggerFactory.getLogger(ReactorMonoTest.class);
 
     @Test
-    public void createMono(){
+    public void createMono() {
         Mono<String> stream4 = Mono.just("One");
         Mono<Object> stream5 = Mono.justOrEmpty(null);
         Mono<Object> stream6 = Mono.justOrEmpty(Optional.empty());
@@ -46,7 +46,7 @@ public class ReactorMonoTest {
     }
 
     @Test
-    public void simpleSubscribe(){
+    public void simpleSubscribe() {
 
     }
 
@@ -55,14 +55,13 @@ public class ReactorMonoTest {
      */
     public Mono<User> requestUserDate(String userId) {
         return Mono.defer(() ->
-            isValid(userId)
-                    ? Mono.fromCallable(() -> requestUser(userId))
-                    : Mono.error(new IllegalArgumentException("Invalid user id")));
+                isValid(userId)
+                        ? Mono.fromCallable(() -> requestUser(userId))
+                        : Mono.error(new IllegalArgumentException("Invalid user id")));
     }
 
     /**
      * 以下代码在调用 requestUserData2(. . . ) 方法时就执行验证
-     *
      * 而这可能发生在实际订阅之前(也就是说， 可能根本不会发生订阅)
      */
     public Mono<User> requestUserData2(String userId) {
@@ -96,6 +95,5 @@ public class ReactorMonoTest {
     private void doLongAction() {
         log.info("Long action");
     }
-
 
 }

@@ -36,6 +36,7 @@ import reactor.util.function.Tuples;
  */
 public class ReactorFluxTest {
     private static final Logger log = LoggerFactory.getLogger(ReactorFluxTest.class);
+
     private final Random random = new Random();
 
 
@@ -50,16 +51,15 @@ public class ReactorFluxTest {
     @Test
     @Disabled
     public void endlessStream2() {
-        Flux.range(1,5)
+        Flux.range(1, 5)
                 .repeat()
-                .doOnNext(e -> log.info("E: {}",e))
+                .doOnNext(e -> log.info("E: {}", e))
                 .take(100)
                 .blockLast();
     }
 
     /**
      * 尝试收集无限流发出的所有元素可能导致 OutOfMemoryException
-     *
      * range 操作符创建从 1 到 100 的整数序列
      * repeat 操作符在源流完成之后一次又一次地订阅源响应式流。
      * collectList 尝试将所有生成的元素收集到一个列表中。
@@ -81,7 +81,7 @@ public class ReactorFluxTest {
     @Test
     public void createFlux() {
         Flux<String> stream1 = Flux.just("Hello", "world");
-        Flux<Integer> stream2 = Flux.fromArray(new Integer[]{1, 2, 3});
+        Flux<Integer> stream2 = Flux.fromArray(new Integer[] { 1, 2, 3 });
         Flux<Integer> stream3 = Flux.range(1, 500);
 
         Flux<String> emptyStream = Flux.empty();
@@ -95,11 +95,12 @@ public class ReactorFluxTest {
      * 们创建一个简单的响应式流并订阅它:
      */
     @Test
-    public void simpleSubscribe(){
-        Flux.just("A","B","C")
+    public void simpleSubscribe() {
+        Flux.just("A", "B", "C")
                 .subscribe(
-                        (data) -> log.info("onNext: {}",data),
-                        errorIgnored -> {},
+                        (data) -> log.info("onNext: {}", data),
+                        errorIgnored -> {
+                        },
                         () -> log.info("onComplete"));
     }
 
@@ -108,11 +109,12 @@ public class ReactorFluxTest {
      * 首先请求 4 个数据，然后立即取消订阅
      */
     @Test
-    public void simpleRangeSubscribe(){
-        Flux.range(1,100)
+    public void simpleRangeSubscribe() {
+        Flux.range(1, 100)
                 .subscribe(
-                        (data) -> log.info("onNext: {}",data),
-                        errorIgnored -> {},
+                        (data) -> log.info("onNext: {}", data),
+                        errorIgnored -> {
+                        },
                         () -> log.info("onComplete"),
                         subscription -> {
                             subscription.request(4);
@@ -122,11 +124,13 @@ public class ReactorFluxTest {
 
     @Test
     public void simpleRange() {
-        Flux.range(2019,9)
-                .subscribe( y -> System.out.print(y + ","));
+        Flux.range(2019, 9)
+                .subscribe(y -> System.out.print(y + ","));
     }
+
     /**
      * 使用 Disposable 取消订阅
+     *
      * @throws InterruptedException /
      */
     @Test
@@ -141,11 +145,9 @@ public class ReactorFluxTest {
 
     /**
      * 实现自定义的 Subscriber
-     *
      * 这个测试类的定义订阅的方法是不对的。它打破了线性代码流，也容易出错。最困难的部分是
      * 我们需要自己管理背压并正确实现订阅者的所有 TCK 要求。此外，在此示例中，我们打破了有关订阅验证和取消这几个 TCK 要求。
-     *
-     *  我们建议扩展 Project Reactor 提供的 BaseSubscriber 类。{@link MySubscriber}
+     * 我们建议扩展 Project Reactor 提供的 BaseSubscriber 类。{@link MySubscriber}
      */
     @Test
     public void subscribingOnStream() throws InterruptedException {
@@ -159,7 +161,7 @@ public class ReactorFluxTest {
             /**
              * 订阅到达时，通过 onSubscribe 回调通知 Subscriber 。在这里，我们保存订阅并初始化请求需求。
              * 如果没有该请求，与 TCK 兼容的提供者将不会发送数据，并且根本不会开始处理元素。
-             * @param s
+             * @param s 、
              */
             @Override
             public void onSubscribe(Subscription s) {
@@ -205,24 +207,23 @@ public class ReactorFluxTest {
     }
 
     // ================================== 映射响应式序列元素 ==================================
+
     /**
      * index 操作符可用于枚举序列中的元素。
-     *
      * timestamp 操作符的行为与 index 操作符类似，但会添加当前时间戳而不是索引。
-     *
      */
     @Test
     public void indexElements() {
-        Flux.range(2018,5)
+        Flux.range(2018, 5)
                 // 使用 timestamp 操作符添加当前时间戳。现在， 序列具有 Flux<Tuple2<Long,Integer>> 类型。
                 .timestamp()
                 // 使用 index 操作符实现枚举。现在， 序列具有 Flux<Tuple2<Long,Tuple2<Long,Integer>>> 类型。
                 .index()
                 .subscribe(
                         e -> log.info("index : {}, ts: {}, value: {}",
-                        e.getT1(),
-                        Instant.ofEpochMilli(e.getT2().getT1()),
-                        e.getT2().getT2()));
+                                e.getT1(),
+                                Instant.ofEpochMilli(e.getT2().getT1()),
+                                e.getT2().getT2()));
     }
 
     // ================================== 过滤响应式序列元素 ==================================
@@ -238,6 +239,7 @@ public class ReactorFluxTest {
 
     /**
      * 在启动-停止命令之间查看元素
+     *
      * @throws InterruptedException /
      */
     @Test
@@ -265,14 +267,14 @@ public class ReactorFluxTest {
     // distinctUntilChanged():可用于无限流以删除出现在不间断行中的重复项
 
     @Test
-    public void collectSort(){
+    public void collectSort() {
         Flux.just(1, 6, 2, 8, 3, 1, 5, 1)
                 .collectSortedList(Comparator.reverseOrder())
                 .subscribe(System.out::println);
     }
 
     @Test
-    public void distinctUntilChanged(){
+    public void distinctUntilChanged() {
         Flux.just(1, 6, 2, 8, 3, 1, 5, 1)
                 .distinct()
                 .subscribe(System.out::println);
@@ -292,22 +294,22 @@ public class ReactorFluxTest {
      */
     @Test
     public void findingIfThereIsEvenElements() {
-        Flux.just(3,5,6,7,11,15,16,17)
-                .any( e -> e % 2 == 0 )
+        Flux.just(3, 5, 6, 7, 11, 15, 16, 17)
+                .any(e -> e % 2 == 0)
                 .subscribe(hasEvens -> log.info("Has evens: {}", hasEvens));
     }
 
     @Test
     public void reduceExample() {
-        Flux.range(1,5)
-                .reduce(0,(acc,elem) -> acc + elem)
+        Flux.range(1, 5)
+                .reduce(0, (acc, elem) -> acc + elem)
                 .subscribe(result -> log.info("Result: {}", result));
     }
 
     @Test
     public void scanExample() {
-        Flux.range(1,5)
-                .scan(0,(acc,elem) -> acc + elem)
+        Flux.range(1, 5)
+                .scan(0, (acc, elem) -> acc + elem)
                 .subscribe(result -> log.info("Result: {}", result));
     }
 
@@ -340,8 +342,8 @@ public class ReactorFluxTest {
      */
     @Test
     public void thenOperator() {
-        Flux.just(1,2,3)
-                .thenMany(Flux.just(4,5))
+        Flux.just(1, 2, 3)
+                .thenMany(Flux.just(4, 5))
                 .subscribe(e -> log.info("onNext: {}", e));
     }
 
@@ -355,9 +357,9 @@ public class ReactorFluxTest {
     @Test
     public void combineLatestOperator() {
         Flux.concat(
-                Flux.just(1,3),
-                Flux.just(4,2),
-                Flux.just(6,5)
+                Flux.just(1, 3),
+                Flux.just(4, 2),
+                Flux.just(6, 5)
         ).subscribe(e -> log.info("onNext: {}", e));
     }
 
@@ -410,17 +412,17 @@ public class ReactorFluxTest {
      * 我们将整数序列按照奇数和偶数进行分组，并仅跟踪每组中的最后两个元素
      */
     @Test
-    public void groupByExample(){
-        Flux.range(1,7)
+    public void groupByExample() {
+        Flux.range(1, 7)
                 // 使用groupBy 操作符，根据取模操作对序列进行奇数和偶数的拆分。操作符返回 Flux<GroupedFlux<String,Integer>> 类型的流。
-                .groupBy( e -> e % 2 == 0 ? "Even":"Odd")
+                .groupBy(e -> e % 2 == 0 ? "Even" : "Odd")
                 // 订阅主 Flux ，而对于每个分组的 flux 元素，应用 scan 操作符。
                 .subscribe(groupFlux -> groupFlux
                         // scan 操作符是具有空列表的种子。分组 flux 中的每个元索都会添加到列表中，如果列表大于两个元素， 则删除最早的元素。
                         .scan(
                                 new LinkedList<>(),
-                                (list,item) -> {
-                                    if(list.size() > 1 ){
+                                (list, item) -> {
+                                    if (list.size() > 1) {
                                         list.remove(0);
                                     }
                                     list.add(item);
@@ -446,10 +448,10 @@ public class ReactorFluxTest {
         Thread.sleep(1000);
     }
 
-    public Flux<String> requestBooks(String user){
-        return Flux.range(1,random.nextInt(3) + 1)
+    public Flux<String> requestBooks(String user) {
+        return Flux.range(1, random.nextInt(3) + 1)
                 .delayElements(Duration.ofMillis(3))
-                .map( i -> "Book" + i);
+                .map(i -> "Book" + i);
     }
 
     public boolean isPrime(int number) {
@@ -462,7 +464,7 @@ public class ReactorFluxTest {
 
     @Test
     public void sample() throws InterruptedException {
-        Flux.range(1,100)
+        Flux.range(1, 100)
                 .delayElements(Duration.ofMillis(1))
                 .sample(Duration.ofMillis(20))
                 .subscribe(r -> log.info("onNext: {}", r));
@@ -483,10 +485,10 @@ public class ReactorFluxTest {
     // doOnEach: 该方法处理表示响应式流领域的所有信号，包括 onError 、onSubscribe 、onNext 、onError 和 doOnComplete 。
 
     @Test
-    public void doOnExample(){
-        Flux.just(1,2,3)
+    public void doOnExample() {
+        Flux.just(1, 2, 3)
                 .concatWith(Flux.error(new RuntimeException("Conn error")))
-                .doOnEach( s -> log.info("signal: {}", s))
+                .doOnEach(s -> log.info("signal: {}", s))
                 .subscribe();
     }
 
@@ -495,20 +497,23 @@ public class ReactorFluxTest {
     // dematerialize() :
     @Test
     public void signalProcessing() {
-        Flux.range(1,3)
-                .doOnNext( e -> System.out.println("data :" + e))
+        Flux.range(1, 3)
+                .doOnNext(e -> System.out.println("data :" + e))
                 .materialize()
-                .doOnNext( e -> System.out.println("signal: " + e))
+                .doOnNext(e -> System.out.println("signal: " + e))
                 .dematerialize()
                 .collectList()
-                .subscribe( r -> System.out.println("result: " + r));
+                .subscribe(r -> System.out.println("result: " + r));
     }
 
     @Test
     public void signalProcessingWithLog() {
-        Flux.range(1,3)
+        Flux.range(1, 3)
                 .log("FluxEvents")
-                .subscribe( e -> {}, e -> {}, () -> {}, s -> s.request(2));
+                .subscribe(e -> {
+                }, e -> {
+                }, () -> {
+                }, s -> s.request(2));
     }
 
     // ================================== 以编程的方式创建流 ==================================
@@ -527,42 +532,43 @@ public class ReactorFluxTest {
     /**
      * 使用 push 工厂方法使一些现有的 API 适配响应式范式。为简单起见，这里我们使用 Java Stream APl 生成 1000 个整数元素并将它们发送到
      * FluxSink 类型的 emitter 对象。在 push 方法中，我们不关心背压和取消， 因为 push 方法本身涵盖了这些功能。
+     *
      * @throws InterruptedException /
      */
     @Test
     public void usingPushOperator() throws InterruptedException {
-        Flux.push( emitter -> IntStream
-                .range(2000,3000)
-                .forEach(emitter::next))
+        Flux.push(emitter -> IntStream
+                        .range(2000, 3000)
+                        .forEach(emitter::next))
                 // 延迟流中的每个元素来模拟背压情况。
                 .delayElements(Duration.ofMillis(1))
-                .subscribe(e -> log.info("onNext: {}",e));
+                .subscribe(e -> log.info("onNext: {}", e));
 
         Thread.sleep(1000);
     }
 
     @Test
     public void usingCreateOperator() throws InterruptedException {
-        Flux.create( emitter -> {
-           emitter.onDispose(() -> log.info("Disposed"));
-            // 将事件推送到发射器
-        })
-                .subscribe(e -> log.info("onNext: {}",e));
+        Flux.create(emitter -> {
+                    emitter.onDispose(() -> log.info("Disposed"));
+                    // 将事件推送到发射器
+                })
+                .subscribe(e -> log.info("onNext: {}", e));
         Thread.sleep(1000);
     }
 
     @Test
     public void usingGenerate() throws InterruptedException {
         Flux.generate(
-                // Tuples.of(OL,1L) 作为序列的初始状态
-                () -> Tuples.of(0L,1L),
-                // 在生成步骤中，我们通过引用状态对，并根据斐波那契序列中的下一个值重新计算新的状态对。
-                (state,sink) -> {
-                    log.info("generated value: {}", state.getT2());
-                    sink.next(state.getT2());
-                    long newValue = state.getT1() + state.getT2();
-                    return Tuples.of(state.getT2(),newValue);
-                })
+                        // Tuples.of(OL,1L) 作为序列的初始状态
+                        () -> Tuples.of(0L, 1L),
+                        // 在生成步骤中，我们通过引用状态对，并根据斐波那契序列中的下一个值重新计算新的状态对。
+                        (state, sink) -> {
+                            log.info("generated value: {}", state.getT2());
+                            sink.next(state.getT2());
+                            long newValue = state.getT1() + state.getT2();
+                            return Tuples.of(state.getT2(), newValue);
+                        })
                 // 使用 delayElements 操作符在 onNext 信号之间引入一些延迟。
                 .delayElements(Duration.ofMillis(1))
                 // 获取前 7 个元素
@@ -578,7 +584,8 @@ public class ReactorFluxTest {
             conn.getData().forEach(
                     data -> log.info("Received data: {}", data)
             );
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.info("Error: {}", e.getMessage());
         }
     }
@@ -600,6 +607,7 @@ public class ReactorFluxTest {
 
     /**
      * 我们可以使用 usingWhen 操作符实现一个更新的事务
+     *
      * @throws InterruptedException /
      */
     @Test
@@ -608,7 +616,7 @@ public class ReactorFluxTest {
                 // beginTransaction 静态方法通过返回 Mono<Transaction> 类型异步返回一个新事务
                 Transaction.beginTransaction(),
                 // 对于给定的事务实例，它会尝试插入新行
-                transaction -> transaction.insertRows(Flux.just("A","B")),
+                transaction -> transaction.insertRows(Flux.just("A", "B")),
                 // 如果步骤上一步成功完成，则提交事务。
                 Transaction::commit,
                 // 如果步骤上一步失败，则回滚事务。
@@ -662,7 +670,8 @@ public class ReactorFluxTest {
                 return Flux.<String>error(new RuntimeException("Conn error"))
                         // 我们的不可靠服务很可能返回错误。但是，我们可以通过应用 delaySequence 操作符来及时转移所有信号。
                         .delaySequence(Duration.ofMillis(100));
-            } else {
+            }
+            else {
                 return Flux.just("Blue Mars", "The Expanse")
                         // 如果客户端很幸运， 它们会收到一些延迟了的推荐。
                         .delayElements(Duration.ofMillis(50));
@@ -706,7 +715,6 @@ public class ReactorFluxTest {
      * 多播流元素
      * 使用 ConnectableFlux 不仅可以生成数据以满足最急迫的需求， 还会缓存数据，以便所有其他订阅者可以按照自己的速
      * 度处理数据。
-     *
      * 此示例冷发布者收到了订阅，只生成了一次数据项。但是，两个订阅者都收到了整个事件集合。
      */
     @Test
@@ -758,6 +766,7 @@ public class ReactorFluxTest {
      * 共享流元素
      * 我们可以使用 ConnectableFlux 向几个订阅者多播事件。但是，我们需要等待订阅者出现
      * 才能开始处理。share 操作符可以将冷发布者转变为热发布者。该操作符会为每个新订阅者传播订阅者尚未错过的事件
+     *
      * @throws InterruptedException /
      */
     @Test
@@ -781,6 +790,7 @@ public class ReactorFluxTest {
     /**
      * 处理时间
      * elapsed 操作符测量与上一个事件的时间间隔。
+     *
      * @throws InterruptedException /
      */
     @Test
@@ -828,7 +838,8 @@ public class ReactorFluxTest {
             if (random.nextBoolean()) {
                 return stream
                         .doOnNext(e -> log.info("[path A] User: {}", e));
-            } else {
+            }
+            else {
                 return stream
                         .doOnNext(e -> log.info("[path B] User: {}", e));
             }

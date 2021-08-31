@@ -15,12 +15,14 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0 2021/8/30:15:25
  * @since 1.0.0
  */
-public class Connection  implements AutoCloseable {
+public class Connection implements AutoCloseable {
     private static final Logger log = LoggerFactory.getLogger(Connection.class);
+
     private final Random rnd = new Random();
 
     /**
      * 静态 newConnection 工厂方法始终返回 Connection 类的新实例。
+     *
      * @return /
      */
     public static Connection newConnection() {
@@ -30,6 +32,7 @@ public class Connection  implements AutoCloseable {
 
     /**
      * 模拟 IO 操作。有时可能导致异常或返回带有有用数据的 Iterable 集合。
+     *
      * @return /
      */
     public Iterable<String> getData() {

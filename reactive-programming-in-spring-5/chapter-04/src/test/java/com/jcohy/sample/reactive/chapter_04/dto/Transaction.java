@@ -20,7 +20,9 @@ import reactor.core.publisher.Mono;
  */
 public class Transaction {
     private static final Logger log = LoggerFactory.getLogger(Transaction.class);
+
     private static final Random random = new Random();
+
     private final int id;
 
     public Transaction(int id) {
@@ -39,7 +41,8 @@ public class Transaction {
                 .flatMap(row -> {
                     if (random.nextInt(10) < 2) {
                         return Mono.error(new RuntimeException("Error on: " + row));
-                    } else {
+                    }
+                    else {
                         return Mono.just(row);
                     }
                 });
@@ -51,7 +54,8 @@ public class Transaction {
             log.info("[T: {}] commit", id);
             if (random.nextBoolean()) {
                 return Mono.empty();
-            } else {
+            }
+            else {
                 return Mono.error(new RuntimeException("Conflict"));
             }
         });
@@ -62,7 +66,8 @@ public class Transaction {
             log.info("[T: {}] rollback", id);
             if (random.nextBoolean()) {
                 return Mono.empty();
-            } else {
+            }
+            else {
                 return Mono.error(new RuntimeException("Conn error"));
             }
         });
