@@ -17,8 +17,16 @@ import java.util.concurrent.CompletionStage;
  */
 public class Puller {
 
+    /**
+     * 使用此客户端将一步，非阻塞通信与外部数据库连接起来.
+     */
     final AsyncDatabaseClient dbClient = new DelayedFakeAsyncDatabaseClient();
 
+    /**
+     * 聚合拉取结果并将其异步发送给调用者.使用 Queue 和 CompletableFuture 来存储接收的值，并在稍后发送给所收集的 Queue
+     * @param count
+     * @return
+     */
     public CompletionStage<Queue<Item>> list(int count) {
         BlockingQueue<Item> storage = new ArrayBlockingQueue<>(count);
         CompletableFuture<Queue<Item>> result = new CompletableFuture<>();

@@ -21,9 +21,9 @@ dependencies {
 	implementation('org.projectlombok:lombok:1.18.2')
 	testImplementation('org.reactivestreams:reactive-streams-tck:1.0.2')
 	testImplementation('org.hamcrest:java-hamcrest:2.0.0.0')
-	testImplementation('junit:junit:4.12')
+	testImplementation('junit:junit:4.13.1')
 }
 
-test {
-	useJUnitPlatform()
-}
+//test {
+//	useJUnitPlatform()
+//}

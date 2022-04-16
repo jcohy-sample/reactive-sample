@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * <p> 描述: .

@@ -45,7 +45,7 @@ public class TakeFilterOperator<T> implements Publisher<T> {
     }
 
     /**
-     * 该类实现 Subscriber 接口并发挥最重要的作用， 因为它会作为实际的 Subscriber 被传递给主数据源。一旦在 nNext
+     * 该类实现 Subscriber 接口并发挥最重要的作用， 因为它会作为实际的 Subscriber 被传递给主数据源。一旦在 onNext
      * 中接收到该元素，它就会被过滤并传输到下游 Subscriber.
      * TakeFilterInner 类不仅实现了 Subscriber 接口，同时还实现了 Subscription 接口，因而它可以被传输到下游 Subscriber,
      * 从而控制所有下游需求。请注意，这里的 Queue 是 ArrayBlockingQueue 的实例，其大小与 take 相同。
