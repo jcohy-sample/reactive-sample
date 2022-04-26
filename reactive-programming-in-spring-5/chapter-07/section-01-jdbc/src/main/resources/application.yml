@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;TRACE_LEVEL_FILE=4
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+    initialization-mode: always
+  h2:
+    console:
+      enabled: true
+
+#spring.datasource.driverClassName: "org.h2.Driver"
+#spring.datasource.url: ""
+#spring.datasource.username: "sa"
+#spring.datasource.password: "sa"
+#spring.h2.console.enabled: true
+#spring.datasource.initialization-mode: always
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} : %msg%n"
+  level:
+    org.springframework.jdbc.datasource: DEBUG
+    org.rpis5.chapters.chapter_07.jdbc: DEBUG
