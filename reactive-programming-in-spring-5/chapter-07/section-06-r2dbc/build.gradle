@@ -30,7 +30,7 @@ ext {
     junitPlatformVersion = '1.2.0'
     testContainersVersion = '1.8.3'
     guavaVersion = '19.0'
-	springDataR2dbcVersion = 'r2dbc-SNAPSHOT'
+	springDataR2dbcVersion = '2.1.0.M4'
 	r2dbcSpiVersion = '1.0.0.BUILD-SNAPSHOT'
 	r2dbcPostgresqlVersion = '1.0.0.BUILD-SNAPSHOT'
 	r2dbcClientlVersion = '1.0.0.BUILD-SNAPSHOT'
@@ -39,7 +39,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 
 	// Magic happens here with Jitpack
-//	compile("com.github.spring-projects:spring-data-jdbc:${springDataR2dbcVersion}")
+	compile("org.springframework.data:spring-data-r2dbc:${springDataR2dbcVersion}")
+	compile("org.springframework.data:spring-data-jdbc:${springDataR2dbcVersion}")
 	compile("io.r2dbc:r2dbc-spi:${r2dbcSpiVersion}")
 	compile("io.r2dbc:r2dbc-postgresql:${r2dbcPostgresqlVersion}")
 	compile("io.r2dbc:r2dbc-client:${r2dbcClientlVersion}")
